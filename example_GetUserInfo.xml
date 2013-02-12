@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <GetUserInfo xmlns="http://schemas.microsoft.com/office/Outlook/2006/OMS">
+      <xmsUser>&lt;?xml version="1.0" encoding="utf-16" standalone="yes"?&gt;&lt;xmsUser client="Phonero Outlook SMS Add-In 1.0.0.0" xmlns="http://schemas.microsoft.com/office/Outlook/2006/OMS"&gt;&lt;userId&gt;XXXXXXXX&lt;/userId&gt;&lt;password&gt;XXXXX&lt;/password&gt;&lt;customData/&gt;&lt;/xmsUser&gt;</xmsUser>
+    </GetUserInfo>
+  </soap:Body>
+</soap:Envelope>

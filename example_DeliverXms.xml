@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <DeliverXms xmlns="http://schemas.microsoft.com/office/Outlook/2006/OMS">
+      <xmsData>&lt;?xml version="1.0" encoding="utf-16" standalone="yes"?&gt;&lt;xmsData client="Phonero Outlook SMS Add-In 1.0.0.0" xmlns="http://schemas.microsoft.com/office/Outlook/2006/OMS"&gt;&lt;user client="Phonero Outlook SMS Add-In 1.0.0.0" xmlns="http://schemas.microsoft.com/office/Outlook/2006/OMS"&gt;&lt;userId&gt;XXXXXXXX&lt;/userId&gt;&lt;password&gt;XXXXX&lt;/password&gt;&lt;replyPhone&gt;XXXXXXXX&lt;/replyPhone&gt;&lt;customData /&gt;&lt;/user&gt;&lt;xmsHead&gt;&lt;requiredService&gt;SMS_SENDER&lt;/requiredService&gt;&lt;sourceType&gt;other&lt;/sourceType&gt;&lt;to&gt;&lt;recipient&gt;XXXXXXXX&lt;/recipient&gt;&lt;/to&gt;&lt;/xmsHead&gt;&lt;xmsBody format="SMS"&gt;&lt;content contentType="text/plain" contentId="87e6f31c-c91d-4d4e-a26c-5734b2ccdbad" contentLocation="1.txt"&gt;Dette er en testmelding fra Phonero Outlook SMS Add-In.&lt;/content&gt;&lt;/xmsBody&gt;&lt;/xmsData&gt;</xmsData>
+    </DeliverXms>
+  </soap:Body>
+</soap:Envelope>
