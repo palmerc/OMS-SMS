@@ -1,15 +1,15 @@
 To run:
-1) Install [Python ZSI][1]
-2) Turn the [WSDL][2] file into code
+1. Install [Python ZSI][1]
+2. Turn the [WSDL][2] file into code
    wsdl2py -b phonero_remix.wsdl
-3) Edit and Run the script
+3. Edit and Run the script
    ./sms.py
 
 
 This client is meant as an example of how to communicate with an [Outlook OMS SMS Gateway][3] using Python and ZSI. There are a number of services on the Internet that allow you to send SMS from Outlook via the Outlook OMS protocol. My service provider had one such gateway, but the documentation only described the outer wrapper of the message.
 
-[The Microsoft Full WSDL][4]
-[Phonero OMSService address][5]
+* [The Microsoft Full WSDL][4]
+* [Phonero OMSService address][5]
 
 The big issue was the xmsData portion of the message. Further complicating matters was the use of SSL in the official client so that I couldn't see a sample message.
 
@@ -22,10 +22,10 @@ Mitmproxy is a python application that acts as a man-in-the-middle generating ce
 
 Once I sent a message I could see that the xmsData was double wrapped. Dumb.
 
-<xmsData>
-   <xmsData>
-   </xmsData>
-</xmsData>
+    <xmsData>
+        <xmsData>
+        </xmsData>
+    </xmsData>
 
 After clearing that up it just worked.
 
