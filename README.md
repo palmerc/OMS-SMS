@@ -1,9 +1,8 @@
 To run:
+
 1. Install [Python ZSI][1]
-2. Turn the [WSDL][2] file into code
-   wsdl2py -b phonero_remix.wsdl
-3. Edit and Run the script
-   ./sms.py
+2. Turn the [WSDL][2] file into code - `wsdl2py -b phonero_remix.wsdl`
+3. Edit and Run the script - `./sms.py`
 
 
 This client is meant as an example of how to communicate with an [Outlook OMS SMS Gateway][3] using Python and ZSI. There are a number of services on the Internet that allow you to send SMS from Outlook via the Outlook OMS protocol. My service provider had one such gateway, but the documentation only described the outer wrapper of the message.
