@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+<wsdl:definitions targetNamespace="http://schemas.microsoft.com/office/Outlook/2006/OMS"
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+xmlns:tns="http://schemas.microsoft.com/office/Outlook/2006/OMS"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://schemas.microsoft.com/office/Outlook/2006/OMS">
+
+      <!-- GetServiceInfo: The Schema of Response Xml-->
+      <xs:simpleType name="tAuthenticationTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="passport" />
+          <xs:enumeration value="fulltrust" />
+          <xs:enumeration value="other" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="tLONG_SMS_SENDER">
+        <xs:attribute name="maxRecipientsPerMessage"
+        type="xs:unsignedInt" use="required" />
+        <xs:attribute name="maxMessagesPerSend"
+        type="xs:unsignedInt" use="required" />
+        <xs:attribute name="maxSbcsPerMessage"
+        type="xs:unsignedInt" use="required" />
+        <xs:attribute name="maxDbcsPerMessage"
+        type="xs:unsignedInt" use="required" />
+      </xs:complexType>
+      <xs:complexType name="tSMS_SENDER">
+        <xs:sequence>
+          <xs:element name="LONG_SMS_SENDER"
+          type="tns:tLONG_SMS_SENDER" minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="maxRecipientsPerMessage"
+        type="xs:unsignedInt" use="required" />
+        <xs:attribute name="maxMessagesPerSend"
+        type="xs:unsignedInt" use="required" />
+        <xs:attribute name="maxSbcsPerMessage"
+        type="xs:unsignedInt" use="required" />
+        <xs:attribute name="maxDbcsPerMessage"
+        type="xs:unsignedInt" use="required" />
+      </xs:complexType>
+      <xs:complexType name="tMMS_SENDER">
+        <xs:attribute name="supportSlide" type="xs:boolean"
+        use="required" />
+        <xs:attribute name="maxRecipientsPerMessage"
+        type="xs:unsignedInt" use="required" />
+        <xs:attribute name="maxSizePerMessage"
+        type="xs:unsignedInt" use="required" />
+        <xs:attribute name="maxSlidesPerMessage"
+        type="xs:unsignedInt" use="required" />
+      </xs:complexType>
+      <xs:complexType name="tSupportedService">
+        <xs:sequence minOccurs="1" maxOccurs="2">
+          <xs:element name="SMS_SENDER" type="tns:tSMS_SENDER"
+          minOccurs="0" />
+          <xs:element name="MMS_SENDER" type="tns:tMMS_SENDER"
+          minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tServiceInfo">
+        <xs:sequence>
+          <xs:element name="serviceProvider" type="xs:string" />
+          <xs:element name="serviceUri" type="xs:string" />
+          <xs:element name="signUpPage" type="xs:string" />
+          <xs:element name="targetLocale" type="xs:unsignedShort"
+          minOccurs="0" default="0" />
+          <xs:element name="localName" type="xs:string" />
+          <xs:element name="englishName" type="xs:string" />
+          <xs:element name="authenticationType"
+          type="tns:tAuthenticationTypeEnum" />
+          <xs:element name="batchSize" type="xs:unsignedInt"
+          minOccurs="0" default="0" />
+          <xs:element name="supportedService"
+          type="tns:tSupportedService" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetServiceInfo">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="serviceInfo" type="tns:tServiceInfo" />
+      <xs:element name="GetServiceInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="GetServiceInfoResult"
+            type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- GetUserInfo Method: The Schema of xmsUser Xml -->
+      <xs:complexType name="tXmsUser">
+        <xs:sequence>
+          <xs:element name="userId" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="password" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="customData" type="xs:string"
+          minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="client" type="xs:string" />
+      </xs:complexType>
+      <xs:element name="xmsUser" type="tns:tXmsUser" />
+      <xs:element name="GetUserInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="xmsUser" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- GetUserInfo Method: The Schema of Response Xml -->
+      <xs:complexType name="tUserError">
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="code" type="xs:string"
+            use="required" />
+            <xs:attribute name="severity" type="xs:string"
+            use="optional" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="tUserInfo">
+        <xs:sequence>
+          <xs:element name="replyPhone" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="smtpAddress" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="error" type="tns:tUserError" />
+          <xs:element name="customData" type="xs:string"
+          minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="userInfo" type="tns:tUserInfo" />
+      <xs:element name="GetUserInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="GetUserInfoResult"
+            type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- DeliverXms Method: The Schema of xmsData Xml -->
+      <xs:simpleType name="tRequiredServiceTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SMS_SENDER" />
+          <xs:enumeration value="MMS_SENDER" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="tTo">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="recipient"
+          type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tXmsHeader">
+        <xs:sequence>
+          <xs:element name="scheduled" type="xs:dateTime"
+          minOccurs="0" />
+          <xs:element name="requiredService"
+          type="tns:tRequiredServiceTypeEnum" minOccurs="0" />
+          <xs:element name="sourceType" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="to" type="tns:tTo" />
+          <xs:element name="subject" type="xs:string"
+          minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tUser">
+        <xs:sequence>
+          <xs:element name="userId" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="password" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="replyPhone" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="customData" type="xs:string"
+          minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tMeta">
+        <xs:attribute name="name" type="xs:string"
+        use="required" />
+        <xs:attribute name="content" type="xs:string"
+        use="required" />
+      </xs:complexType>
+      <xs:complexType name="tRoot-layout">
+        <xs:attribute name="width" type="xs:unsignedInt"
+        use="required" />
+        <xs:attribute name="height" type="xs:unsignedByte"
+        use="required" />
+        <xs:attribute name="background-color" type="xs:string"
+        use="required" />
+      </xs:complexType>
+      <xs:complexType name="tRegion">
+        <xs:attribute name="id" type="xs:string" use="required" />
+        <xs:attribute name="left" type="xs:string"
+        use="required" />
+        <xs:attribute name="top" type="xs:string" use="required" />
+        <xs:attribute name="width" type="xs:string"
+        use="required" />
+        <xs:attribute name="height" type="xs:string"
+        use="required" />
+        <xs:attribute name="fit" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="tLayout">
+        <xs:sequence>
+          <xs:element name="root-layout" type="tns:tRoot-layout" />
+          <xs:element name="region" type="tns:tRegion"
+          maxOccurs="2" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tHeader">
+        <xs:sequence>
+          <xs:element name="meta" type="tns:tMeta" minOccurs="0" />
+          <xs:element name="layout" type="tns:tLayout" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tImg">
+        <xs:attribute name="src" type="xs:string" use="required" />
+        <xs:attribute name="region" type="xs:string"
+        use="required" />
+      </xs:complexType>
+      <xs:complexType name="tText">
+        <xs:attribute name="src" type="xs:string" use="required" />
+        <xs:attribute name="region" type="xs:string"
+        use="required" />
+        <xs:attribute name="foreground-color" type="xs:string"
+        use="optional" />
+      </xs:complexType>
+      <xs:complexType name="tAudio">
+        <xs:attribute name="src" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="tPar">
+        <xs:sequence>
+          <xs:element name="img" type="tns:tImg" minOccurs="0" />
+          <xs:element name="text" type="tns:tText" minOccurs="0" />
+          <xs:element name="audio" type="tns:tAudio"
+          minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="dur" type="xs:string" use="required" />
+      </xs:complexType>
+      <xs:complexType name="tBody">
+        <xs:sequence>
+          <xs:element name="par" type="tns:tPar"
+          maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tMmsSlides">
+        <xs:sequence>
+          <xs:element name="head" type="tns:tHeader"
+          minOccurs="0" />
+          <xs:element name="body" type="tns:tBody" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tContent">
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="contentType" type="xs:string"
+            use="required" />
+            <xs:attribute name="contentId" type="xs:string"
+            use="required" />
+            <xs:attribute name="contentLocation" type="xs:string"
+            use="required" />
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="tXmsBody">
+        <xs:sequence>
+          <xs:element name="mmsSlides" type="tns:tMmsSlides"
+          minOccurs="0" />
+          <xs:element name="content" type="tns:tContent"
+          maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="format" type="xs:string"
+        use="required" />
+      </xs:complexType>
+      <xs:complexType name="tXmsData">
+        <xs:sequence>
+          <xs:element name="user" type="tns:tUser" minOccurs="0" />
+          <xs:element name="xmsHead" type="tns:tXmsHeader"
+          minOccurs="0" />
+          <xs:element name="xmsBody" type="tns:tXmsBody" />
+        </xs:sequence>
+        <xs:attribute name="client" type="xs:string" />
+      </xs:complexType>
+      <xs:element name="xmsData" type="tns:tXmsData" />
+      <xs:element name="DeliverXms">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="xmsData" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- DeliverXms Method: The Schema of Response Xml -->
+      <xs:complexType name="tDeliveryError">
+        <xs:sequence>
+          <xs:element name="content" type="xs:string"
+          minOccurs="0" />
+          <xs:element name="recipientList" type="xs:string"
+          minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="code" type="xs:string"
+        use="required" />
+        <xs:attribute name="severity" type="xs:string"
+        use="required" />
+      </xs:complexType>
+      <xs:complexType name="tXmsResponse">
+        <xs:sequence>
+          <xs:element name="error" type="tns:tDeliveryError"
+          maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="xmsResponse" type="tns:tXmsResponse" />
+      <xs:element name="DeliverXmsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="DeliverXmsResult" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetServiceInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServiceInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetServiceInfoSoapOut">
+    <wsdl:part name="parameters"
+    element="tns:GetServiceInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoSoapOut">
+    <wsdl:part name="parameters"
+    element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeliverXmsSoapIn">
+    <wsdl:part name="parameters" element="tns:DeliverXms" />
+  </wsdl:message>
+  <wsdl:message name="DeliverXmsSoapOut">
+    <wsdl:part name="parameters"
+    element="tns:DeliverXmsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OMSServiceSoap">
+    <wsdl:operation name="GetServiceInfo">
+      <wsdl:input message="tns:GetServiceInfoSoapIn" />
+      <wsdl:output message="tns:GetServiceInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input message="tns:GetUserInfoSoapIn" />
+      <wsdl:output message="tns:GetUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeliverXms">
+      <wsdl:input message="tns:DeliverXmsSoapIn" />
+      <wsdl:output message="tns:DeliverXmsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OMSServiceSoap" type="tns:OMSServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetServiceInfo">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/Outlook/2006/OMS/GetServiceInfo"
+      style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/Outlook/2006/OMS/GetUserInfo"
+      style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeliverXms">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/Outlook/2006/OMS/DeliverXms"
+      style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OMSServiceSoap12" type="tns:OMSServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetServiceInfo">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/Outlook/2006/OMS/GetServiceInfo"
+      style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/Outlook/2006/OMS/GetUserInfo"
+      style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeliverXms">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/Outlook/2006/OMS/DeliverXms"
+      style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OMSService">
+    <wsdl:port name="OMSServiceSoap" binding="tns:OMSServiceSoap">
+      <soap:address location="https://www.redoxygen.net/oms/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OMSServiceSoap12"
+    binding="tns:OMSServiceSoap12">
+      <soap12:address location="https://www.redoxygen.net/oms/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
